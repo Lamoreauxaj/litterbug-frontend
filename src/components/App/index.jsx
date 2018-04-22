@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import faTasks from '@fortawesome/fontawesome-free-solid/faTasks';
+import faTrophy from '@fortawesome/fontawesome-free-solid/faTrophy';
 import faUserCircle from '@fortawesome/fontawesome-free-solid/faUserCircle';
 import { actions as envActions } from '/reducers/env';
 import styles from './stylesheet.scss';
@@ -52,7 +53,7 @@ class App extends React.Component {
         <nav className={classes(styles.nav, navOpacity && styles.shadow)}
              style={{ backgroundColor: `rgba(13, 63, 82, ${navOpacity})` }}>
           <div className={styles.icon} onClick={() => this.toggleShowTasks()}>
-            <FontAwesomeIcon fixedWidth icon={faTasks} />
+            <FontAwesomeIcon fixedWidth icon={showTasks ? faTrophy : faTasks} />
           </div>
           <div className={styles.title}>LitterBug</div>
           <div className={styles.icon}>

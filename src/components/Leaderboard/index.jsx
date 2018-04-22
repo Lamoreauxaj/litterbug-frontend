@@ -24,16 +24,13 @@ class Leaderboard extends React.Component {
                 className={styles.bold}>Dallas, Texas</span></span>
             </div>
             <a className={styles.button} href="#">
-              <FontAwesomeIcon fixedWidth icon={faMap} className={styles.icon} />
-              <span className={styles.text}>Local</span>
+              <FontAwesomeIcon fixedWidth icon={faMap} />
             </a>
             <a className={styles.button} href="#">
-              <FontAwesomeIcon fixedWidth icon={faFlag} className={styles.icon} />
-              <span className={styles.text}>Regional</span>
+              <FontAwesomeIcon fixedWidth icon={faFlag} />
             </a>
             <a className={styles.button} href="#">
-              <FontAwesomeIcon fixedWidth icon={faGlobe} className={styles.icon} />
-              <span className={styles.text}>Global</span>
+              <FontAwesomeIcon fixedWidth icon={faGlobe} />
             </a>
           </div>
         </div>

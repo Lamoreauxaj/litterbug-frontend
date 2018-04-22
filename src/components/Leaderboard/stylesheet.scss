@@ -67,14 +67,6 @@
         font-weight: bold;
         margin-left: 8px;
 
-        .icon {
-          margin-right: 4px;
-        }
-
-        .text {
-          text-transform: uppercase;
-        }
-
         &:active {
           background-color: white;
           color: $theme-normal;

@@ -42,7 +42,7 @@ class Camera extends React.Component {
       <div className={styles.camera}>
         <Webcam
           audio={false}
-          width={400}
+          width={640}
           ref={this.webcamRef}
           screenshotFormat="image/jpeg" />
       </div>
