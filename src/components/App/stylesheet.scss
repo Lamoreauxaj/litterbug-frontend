@@ -108,6 +108,7 @@ input {
       display: flex;
       flex-direction: column;
       align-items: stretch;
+      background-color: $theme-normal;
       box-shadow: rgba(black, .8) 0 0 16px;
       overflow-y: auto;
 
