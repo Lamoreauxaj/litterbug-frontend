@@ -1,0 +1,74 @@
+@import "~/common/stylesheet/index";
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: subpixel-antialiased;
+  user-select: none;
+  color: $color-font;
+  font-size: $font-size-normal;
+  overflow-y: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input {
+  color: inherit;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100%;
+
+  .nav {
+    display: flex;
+    align-items: stretch;
+    background-color: rgba($theme-normal, 0);
+    height: $height-nav;
+    position: fixed;
+    z-index: 5;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    .title {
+      flex: 1;
+      text-align: center;
+      align-self: center;
+      font-size: $font-size-large;
+    }
+
+    .icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: $height-nav;
+      font-size: $font-size-icon;
+
+      &.selected {
+        border-bottom: 2px solid $color-font;
+      }
+    }
+  }
+
+  .main {
+    min-height: 100%;
+  }
+}
