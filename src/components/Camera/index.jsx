@@ -36,7 +36,7 @@ class Camera extends React.Component {
       }).then(response => {
         const { valid, similarity } = response.data;
         if (valid) onValid();
-        this.setState({ similarity });
+        this.setState({ similarity: similarity.toFixed(1) });
       }).catch(console.error);
     }, 3000);
   }
