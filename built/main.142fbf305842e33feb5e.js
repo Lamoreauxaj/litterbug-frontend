@@ -3048,7 +3048,7 @@ var defaultState = {
     title: 'Attend Earth Day TX',
     cover: './img/earthday.jpg',
     total: 60,
-    current: 60
+    current: 40
   }, {
     title: 'Plant a Tree',
     cover: './img/planting.jpg',
