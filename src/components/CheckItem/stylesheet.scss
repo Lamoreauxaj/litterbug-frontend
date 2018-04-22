@@ -1,0 +1,58 @@
+@import "~/common/stylesheet/index";
+
+.check_item {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  background-color: $theme-light;
+  height: $height-row;
+  border-bottom: 1px solid rgba(white, .2);
+
+  .progress {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background-color: $theme-normal;
+  }
+
+  .wrapper {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+
+    .icon {
+      font-size: $font-size-large;
+      width: $height-row;
+      display: flex;
+      justify-content: center;
+
+      &.done {
+        color: $color-positive;
+      }
+
+      &.doing {
+        color: $color-neutral;
+      }
+
+      &.not {
+        color: $color-negative;
+      }
+    }
+
+    .name {
+      font-size: $font-size-large;
+      flex: 1;
+    }
+
+    .points {
+      margin-right: 24px;
+
+      .current {
+        font-weight: bold;
+        font-size: $font-size-large;
+      }
+    }
+  }
+}

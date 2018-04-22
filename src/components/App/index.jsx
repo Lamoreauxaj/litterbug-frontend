@@ -6,7 +6,7 @@ import faUserCircle from '@fortawesome/fontawesome-free-solid/faUserCircle';
 import { actions as envActions } from '/reducers/env';
 import styles from './stylesheet.scss';
 import { Route, Switch } from "react-router-dom";
-import { TaskList } from "/components";
+import { TaskDetail } from "/components";
 
 @connect(
   ({ env }) => ({
@@ -30,7 +30,7 @@ class App extends React.Component {
         </nav>
         <main className={styles.main}>
           <Switch>
-            <Route path="/tasks" component={TaskList} />
+            <Route path="/tasks" component={TaskDetail} />
           </Switch>
         </main>
       </div>

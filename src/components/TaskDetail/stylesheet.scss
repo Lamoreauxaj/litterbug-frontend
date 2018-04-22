@@ -1,6 +1,6 @@
 @import "~/common/stylesheet/index";
 
-.task_list {
+.task_detail {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -76,32 +76,6 @@
           color: $theme-normal;
         }
       }
-    }
-  }
-
-  .task {
-    display: flex;
-    align-items: center;
-    background-color: $theme-normal;
-    padding: 28px 24px;
-    border-bottom: 1px solid $theme-light;
-
-    .icon {
-      font-size: $font-size-large;
-      margin-right: 8px;
-    }
-
-    .name {
-      font-size: $font-size-large;
-      flex: 1;
-    }
-
-    .points {
-
-    }
-
-    &.checked {
-      background-color: $theme-light;
     }
   }
 }
