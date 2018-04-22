@@ -86,7 +86,7 @@
 
     .icon {
       font-size: $font-size-large;
-      width: $height-row;
+      width: 72px;
       display: flex;
       justify-content: center;
       font-weight: bold;
@@ -109,11 +109,16 @@
     .name {
       font-size: $font-size-large;
       flex: 1;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      margin-right: 8px;
+      overflow: hidden;
     }
 
     .points {
       margin-right: 24px;
       font-weight: bold;
+      white-space: nowrap;
     }
   }
 }

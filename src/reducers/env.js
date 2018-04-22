@@ -41,6 +41,38 @@ const defaultState = {
       current: 5,
     },
   ],
+  sponsors: [
+    {
+      title: '$50 Amazon Gift Card',
+      cover: './img/amazongift.jpg',
+      points: 250,
+    },
+    {
+      title: '$1,000 Southwest Airlines Holidays',
+      cover: './img/southwest.jpg',
+      points: 5000,
+    },
+    {
+      title: '$500 Paypal Cash',
+      cover: './img/paypal.png',
+      points: 2500,
+    },
+    {
+      title: '$200 Uber Gift Card',
+      cover: './img/ubergiftcard.jpg',
+      points: 1000,
+    },
+    {
+      title: 'iPhone 8',
+      cover: './img/iphone8.jpeg',
+      points: 5000,
+    },
+    {
+      title: 'Curved Samsung TV',
+      cover: './img/samsungtv.jpeg',
+      points: 5000,
+    },
+  ],
   taskIndex: -1,
 };
 

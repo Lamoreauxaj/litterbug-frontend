@@ -28,6 +28,7 @@ class Leaderboard extends React.Component {
         points: points | 0,
       }
     });
+    this.rank = Math.random() * 100 + 21 | 0;
   }
 
   setScale(scale) {
@@ -44,8 +45,17 @@ class Leaderboard extends React.Component {
           <div className={styles.overlay}>
             <div className={styles.detail}>
               <span className={styles.name}>Leaderboard</span>
-              <span className={styles.sub}>Ranked <span className={styles.bold}>#17</span> in <span
-                className={styles.bold}>Dallas, Texas</span></span>
+              <span className={styles.sub}>
+                <span className={styles.bold}>#{this.rank}</span> in <span className={styles.bold}>
+                {
+                  [
+                    'Dallas',
+                    'Texas',
+                    'the World',
+                  ][scale]
+                }
+              </span>
+              </span>
             </div>
             <a className={classes(styles.button, scale === 0 && styles.selected)} href="#"
                onClick={() => this.setScale(0)}>

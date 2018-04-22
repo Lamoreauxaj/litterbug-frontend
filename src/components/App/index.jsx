@@ -5,10 +5,11 @@ import faTasks from '@fortawesome/fontawesome-free-solid/faTasks';
 import faTrophy from '@fortawesome/fontawesome-free-solid/faTrophy';
 import faUserCircle from '@fortawesome/fontawesome-free-solid/faUserCircle';
 import faArrowLeft from '@fortawesome/fontawesome-free-solid/faArrowLeft';
+import faTimes from '@fortawesome/fontawesome-free-solid/faTimes';
 import { actions as envActions } from '/reducers/env';
 import styles from './stylesheet.scss';
 import { classes } from '/common/util';
-import { Leaderboard, TaskDetail, TaskList } from '/components';
+import { Leaderboard, Profile, TaskDetail, TaskList } from '/components';
 
 @connect(
   ({ env }) => ({
@@ -25,6 +26,7 @@ class App extends React.Component {
 
     this.state = {
       navOpacity: 0,
+      showProfile: false,
     }
   }
 
@@ -52,8 +54,12 @@ class App extends React.Component {
     }
   }
 
+  setShowProfile(showProfile) {
+    this.setState({ showProfile });
+  }
+
   render() {
-    const { navOpacity } = this.state;
+    const { navOpacity, showProfile } = this.state;
     const { taskIndex } = this.props.env;
 
     return (
@@ -64,7 +70,7 @@ class App extends React.Component {
             <FontAwesomeIcon fixedWidth icon={taskIndex === -2 ? faTasks : taskIndex === -1 ? faTrophy : faArrowLeft} />
           </a>
           <div className={styles.title}>LitterBug</div>
-          <a className={styles.icon} href="#">
+          <a className={styles.icon} href="#" onClick={() => this.setShowProfile(true)}>
             <FontAwesomeIcon fixedWidth icon={faUserCircle} />
           </a>
         </nav>
@@ -77,6 +83,17 @@ class App extends React.Component {
                 <TaskDetail />
           }
         </main>
+        {
+          showProfile &&
+          <div className={styles.dialog_container}>
+            <div className={styles.dialog}>
+              <Profile />
+              <a className={styles.close} href="#" onClick={() => this.setShowProfile(false)}>
+                <FontAwesomeIcon fixedWidth icon={faTimes} />
+              </a>
+            </div>
+          </div>
+        }
       </div>
     );
   }
