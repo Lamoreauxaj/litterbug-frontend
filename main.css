@@ -1,0 +1,7 @@
+#map
+{
+    position: absolute;
+    height: 25%;
+    width: 25%;
+    z-index: 1;
+}
