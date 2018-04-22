@@ -105046,6 +105046,7 @@ var Litters = (_dec = (0, _reactRedux.connect)(function (_ref) {
     value: function increaseProgress() {
       var progress = this.state.progress + .25;
       this.setState({ progress: progress });
+      this.props.setTaskIndex(-1);
     }
   }, {
     key: 'render',
@@ -109362,37 +109363,31 @@ var Camera = function (_React$Component) {
 
 
       this.timer = window.setInterval(function () {
-        try {
-          var imageSrc = _this2.webcamRef.current.getScreenshot();
-          var dataURLtoBlob = function dataURLtoBlob(dataURL) {
-            var binary = window.atob(dataURL.split(',')[1]);
-            var array = [];
-            var i = 0;
-            while (i < binary.length) {
-              array.push(binary.charCodeAt(i++));
-            }return new Blob([new Uint8Array(array)], { type: 'image/jpeg' });
-          };
-          var data = new FormData();
-          data.append('file', dataURLtoBlob(imageSrc));
-          _axios2.default.post('https://litter-bug.com/validate-image', data, {
-            headers: {
-              'accept': 'application/json',
-              'Accept-Language': 'en-US,en;q=0.8',
-              'Content-Type': 'multipart/form-data; boundary=' + data._boundary
-            }
-          }).then(function (response) {
-            var _response$data = response.data,
-                valid = _response$data.valid,
-                similarity = _response$data.similarity;
+        var imageSrc = _this2.webcamRef.current.getScreenshot();
+        var dataURLtoBlob = function dataURLtoBlob(dataURL) {
+          var binary = window.atob(dataURL.split(',')[1]);
+          var array = [];
+          var i = 0;
+          while (i < binary.length) {
+            array.push(binary.charCodeAt(i++));
+          }return new Blob([new Uint8Array(array)], { type: 'image/jpeg' });
+        };
+        var data = new FormData();
+        data.append('file', dataURLtoBlob(imageSrc));
+        _axios2.default.post('https://litter-bug.com/validate-image', data, {
+          headers: {
+            'accept': 'application/json',
+            'Accept-Language': 'en-US,en;q=0.8',
+            'Content-Type': 'multipart/form-data; boundary=' + data._boundary
+          }
+        }).then(function (response) {
+          var _response$data = response.data,
+              valid = _response$data.valid,
+              similarity = _response$data.similarity;
 
-            if (valid) onValid();
-            _this2.setState({ similarity: similarity });
-          }).catch(function (e) {
-            return _this2.setState({ similarity: e.status });
-          });
-        } catch (e) {
-          _this2.setState({ similarity: e.message });
-        }
+          if (valid) onValid();
+          _this2.setState({ similarity: similarity });
+        }).catch(console.error);
       }, 3000);
     }
   }, {
@@ -109412,6 +109407,7 @@ var Camera = function (_React$Component) {
           width: 400,
           height: 320,
           ref: this.webcamRef,
+          videoSource: '9a49e04bcf630dcf5b54e4e59ee0fe70eb42979a0838b457dfd3d65b769c8b0f',
           screenshotFormat: 'image/jpeg' })
       );
     }

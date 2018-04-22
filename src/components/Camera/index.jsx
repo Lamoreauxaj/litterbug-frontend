@@ -54,6 +54,7 @@ class Camera extends React.Component {
           width={400}
           height={320}
           ref={this.webcamRef}
+          videoSource="9a49e04bcf630dcf5b54e4e59ee0fe70eb42979a0838b457dfd3d65b769c8b0f"
           screenshotFormat="image/jpeg" />
       </div>
     );
