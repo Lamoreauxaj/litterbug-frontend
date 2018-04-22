@@ -1,0 +1,21 @@
+{
+  "name": "LitterBug",
+  "short_name": "LitterBug",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#0D3F52",
+  "background_color": "#0D3F52",
+  "description": "LitterBug",
+  "icons": [
+    {
+      "src": "./img/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "web"
+    }
+  ]
+}

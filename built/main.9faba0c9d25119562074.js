@@ -105182,7 +105182,13 @@ var TaskDetail = (_dec = (0, _reactRedux.connect)(function (_ref) {
         'div',
         { className: _stylesheet2.default.task_detail },
         _react2.default.createElement(_components.TaskItem, { task: task }),
-        [_react2.default.createElement(_components2.Litters, null)][taskIndex]
+        [_react2.default.createElement(_components2.Litters, null), _react2.default.createElement(
+          'div',
+          { className: _stylesheet2.default.list },
+          _react2.default.createElement(_components.CheckItem, { points: 0, progress: 0, label: 'Go to Somewhere' }),
+          _react2.default.createElement(_components.CheckItem, { extra: true, points: 10, progress: 0, label: 'Walk instead of Driving' }),
+          _react2.default.createElement(_components.CheckItem, { points: 25, progress: 0, label: 'Pick up 5 Pieces of Trash' })
+        )][taskIndex]
       );
     }
   }]);
