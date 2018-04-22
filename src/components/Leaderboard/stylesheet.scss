@@ -8,7 +8,7 @@
   .cover {
     position: relative;
     height: 240px;
-    background: url(./img/task/leaderboard.jpg) top;
+    background: url(./img/leaderboard.jpg) top;
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -67,7 +67,8 @@
         font-weight: bold;
         margin-left: 8px;
 
-        &:active {
+        &:active,
+        &.selected {
           background-color: white;
           color: $theme-normal;
         }

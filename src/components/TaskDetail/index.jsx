@@ -1,26 +1,24 @@
 import React from 'react';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import faPlay from '@fortawesome/fontawesome-free-solid/faPlay';
 import styles from './stylesheet.scss';
-import { Link } from 'react-router-dom';
-import { Camera, CheckItem, TrashMap } from '/components';
+import { Camera, CheckItem, TaskItem, TrashMap } from '/components';
+import { connect } from 'react-redux';
+import { actions as envActions } from '/reducers/env';
 
+@connect(
+  ({ env }) => ({
+    env,
+  }), {
+    ...envActions,
+  }
+)
 class TaskDetail extends React.Component {
   render() {
+    const { tasks, taskIndex } = this.props.env;
+    const task = tasks[taskIndex];
+
     return (
       <div className={styles.task_detail}>
-        <div className={styles.cover}>
-          <div className={styles.overlay}>
-            <div className={styles.detail}>
-              <span className={styles.name}>Pick up Litters</span>
-              <span className={styles.sub}>Earned <span className={styles.bold}>5</span> out of <span className={styles.bold}>32 LTB</span></span>
-            </div>
-            <a className={styles.button} href="#">
-              <FontAwesomeIcon fixedWidth icon={faPlay} className={styles.icon} />
-              <span className={styles.text}>Begin</span>
-            </a>
-          </div>
-        </div>
+        <TaskItem task={task} />
         <CheckItem points={0} progress={1} label="Go to Somewhere">
           <TrashMap />
         </CheckItem>

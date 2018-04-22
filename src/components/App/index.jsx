@@ -4,10 +4,11 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import faTasks from '@fortawesome/fontawesome-free-solid/faTasks';
 import faTrophy from '@fortawesome/fontawesome-free-solid/faTrophy';
 import faUserCircle from '@fortawesome/fontawesome-free-solid/faUserCircle';
+import faArrowLeft from '@fortawesome/fontawesome-free-solid/faArrowLeft';
 import { actions as envActions } from '/reducers/env';
 import styles from './stylesheet.scss';
 import { classes } from '/common/util';
-import { Leaderboard, TaskDetail } from '/components';
+import { Leaderboard, TaskDetail, TaskList } from '/components';
 
 @connect(
   ({ env }) => ({
@@ -24,7 +25,6 @@ class App extends React.Component {
 
     this.state = {
       navOpacity: 0,
-      showTasks: false,
     }
   }
 
@@ -41,30 +41,40 @@ class App extends React.Component {
     this.setState({ navOpacity });
   }
 
-  toggleShowTasks(showTasks = !this.state.showTasks) {
-    this.setState({ showTasks });
+  handleClickMenu() {
+    const { taskIndex } = this.props.env;
+    if (taskIndex === -2) {
+      this.props.setTaskIndex(-1);
+    } else if (taskIndex === -1) {
+      this.props.setTaskIndex(-2);
+    } else {
+      this.props.setTaskIndex(-1);
+    }
   }
 
   render() {
-    const { navOpacity, showTasks } = this.state;
+    const { navOpacity } = this.state;
+    const { taskIndex } = this.props.env;
 
     return (
       <div className={styles.app}>
         <nav className={classes(styles.nav, navOpacity && styles.shadow)}
              style={{ backgroundColor: `rgba(13, 63, 82, ${navOpacity})` }}>
-          <div className={styles.icon} onClick={() => this.toggleShowTasks()}>
-            <FontAwesomeIcon fixedWidth icon={showTasks ? faTrophy : faTasks} />
-          </div>
+          <a className={styles.icon} href="#" onClick={() => this.handleClickMenu()}>
+            <FontAwesomeIcon fixedWidth icon={taskIndex === -2 ? faTasks : taskIndex === -1 ? faTrophy : faArrowLeft} />
+          </a>
           <div className={styles.title}>LitterBug</div>
-          <div className={styles.icon}>
+          <a className={styles.icon} href="#">
             <FontAwesomeIcon fixedWidth icon={faUserCircle} />
-          </div>
+          </a>
         </nav>
         <main className={styles.main}>
           {
-            showTasks ?
-              <TaskDetail /> :
-              <Leaderboard />
+            taskIndex === -2 ?
+              <Leaderboard /> :
+              taskIndex === -1 ?
+                <TaskList /> :
+                <TaskDetail />
           }
         </main>
       </div>
