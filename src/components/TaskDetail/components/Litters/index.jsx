@@ -78,7 +78,9 @@ class Litters extends React.Component {
   increaseProgress() {
     const progress = this.state.progress + .25;
     this.setState({ progress });
-    this.props.setTaskIndex(-1);
+    if (progress === 1) {
+      this.setState({ step: 3 })
+    }
   }
 
   render() {

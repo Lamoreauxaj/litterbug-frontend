@@ -105046,7 +105046,9 @@ var Litters = (_dec = (0, _reactRedux.connect)(function (_ref) {
     value: function increaseProgress() {
       var progress = this.state.progress + .25;
       this.setState({ progress: progress });
-      this.props.setTaskIndex(-1);
+      if (progress === 1) {
+        this.setState({ step: 3 });
+      }
     }
   }, {
     key: 'render',
