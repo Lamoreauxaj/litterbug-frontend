@@ -47,10 +47,12 @@
     .name {
       font-size: $font-size-large;
       flex: 1;
+      margin-right: 8px;
     }
 
     .points {
       margin-right: 24px;
+      white-space: nowrap;
 
       .current {
         font-weight: bold;

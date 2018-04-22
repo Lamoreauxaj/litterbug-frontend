@@ -18,6 +18,7 @@ class TrashMap extends React.Component {
     return (
       <div className={styles.trash_map}>
         <Map google={this.props.google}
+             mapTypeControl={false}
              initialCenter={{ lat: clat, lng: clng }}
              mapType="satellite"
              zoom={10}>

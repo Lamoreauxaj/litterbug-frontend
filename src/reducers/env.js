@@ -13,14 +13,14 @@ const defaultState = {
     {
       title: 'Pick Up Litters',
       cover: './img/litters.jpg',
-      total: 25,
+      total: 35,
       current: 0,
     },
     {
       title: 'Attend Earth Day TX',
       cover: './img/earthday.jpg',
-      total: 50,
-      current: 50,
+      total: 60,
+      current: 60,
     },
     {
       title: 'Plant a Tree',

@@ -41,7 +41,7 @@ class Litters extends React.Component {
           const db = (Math.abs(beta - lastBeta) + 360) % 360;
           const dg = (Math.abs(gamma - lastGamma) + 180) % 180;
           const delta = Math.sqrt(da * da + db * db + dg * dg);
-          if (delta < .1) {
+          if (delta < .3) {
             still++;
           } else {
             nonstill++;
@@ -49,14 +49,14 @@ class Litters extends React.Component {
           const { step } = this.state;
           if (step === 0) {
             if (still + nonstill > 30) {
-              if (still === 0 || nonstill / still > 1) {
+              if (nonstill > still) {
                 this.setState({ step: 1 });
               }
               still = nonstill = 0;
             }
           } else if (step === 1) {
             if (still + nonstill > 30) {
-              if (nonstill === 0 || still / nonstill > 1.5) {
+              if (still > nonstill) {
                 this.setState({ step: 2 });
                 this.gn.end();
               }

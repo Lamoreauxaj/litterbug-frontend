@@ -4,4 +4,15 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background: black;
+
+    .map_container {
+      height: 280px;
+    }
+  }
 }
