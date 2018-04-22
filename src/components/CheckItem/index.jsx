@@ -10,7 +10,7 @@ import { classes } from '/common/util';
 
 class CheckItem extends React.Component {
   render() {
-    const { children, extra, points, progress } = this.props;
+    const { label, children, extra, points, progress } = this.props;
 
     return (
       <div className={styles.check_item}>
@@ -35,11 +35,17 @@ class CheckItem extends React.Component {
                     <FontAwesomeIcon fixedWidth icon={extra ? faPlus : faCircle} />
                   </div>
           }
-          <span className={styles.name}>{children}</span>
+          <span className={styles.name}>{label}</span>
           <span className={styles.points}>
             <span className={styles.current}>{Math.max(points * progress, 0) | 0}</span> / {points} LTB
           </span>
         </div>
+        {
+          children &&
+          <div className={styles.content}>
+            {children}
+          </div>
+        }
       </div>
     );
   }

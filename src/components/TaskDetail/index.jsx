@@ -3,7 +3,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import faPlay from '@fortawesome/fontawesome-free-solid/faPlay';
 import styles from './stylesheet.scss';
 import { Link } from 'react-router-dom';
-import { CheckItem } from '/components';
+import { Camera, CheckItem, TrashMap } from '/components';
 
 class TaskDetail extends React.Component {
   render() {
@@ -21,14 +21,13 @@ class TaskDetail extends React.Component {
             </Link>
           </div>
         </div>
-        <CheckItem points={0} progress={1}>
-          Go to Somewhere
+        <CheckItem points={0} progress={1} label="Go to Somewhere">
+          <TrashMap />
         </CheckItem>
-        <CheckItem extra points={10} progress={-1}>
-          Walk instead of Driving
+        <CheckItem extra points={10} progress={-1} label="Walk instead of Driving">
         </CheckItem>
-        <CheckItem points={25} progress={1 / 3}>
-          Pick up 5 Pieces of Trash
+        <CheckItem points={25} progress={1 / 3} label="Pick up 5 Pieces of Trash">
+          <Camera />
         </CheckItem>
       </div>
     );

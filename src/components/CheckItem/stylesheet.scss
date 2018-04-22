@@ -3,9 +3,9 @@
 .check_item {
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: stretch;
   background-color: $theme-light;
-  height: $height-row;
   border-bottom: 1px solid rgba(white, .2);
 
   .progress {
@@ -13,6 +13,7 @@
     top: 0;
     bottom: 0;
     left: 0;
+    height: $height-row;
     background-color: $theme-normal;
   }
 
@@ -21,6 +22,7 @@
     flex: 1;
     display: flex;
     align-items: center;
+    height: $height-row;
 
     .icon {
       font-size: $font-size-large;
@@ -53,6 +55,22 @@
         font-weight: bold;
         font-size: $font-size-large;
       }
+    }
+  }
+
+  .content {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+
+    &:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      content: '';
+      background-image: linear-gradient(to bottom, rgba(black, .4), rgba(black, 0));
     }
   }
 }
