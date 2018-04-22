@@ -6,7 +6,7 @@ import faUserCircle from '@fortawesome/fontawesome-free-solid/faUserCircle';
 import { actions as envActions } from '/reducers/env';
 import styles from './stylesheet.scss';
 import { classes } from '/common/util';
-import { TaskDetail } from '/components';
+import { Leaderboard, TaskDetail } from '/components';
 
 @connect(
   ({ env }) => ({
@@ -23,6 +23,7 @@ class App extends React.Component {
 
     this.state = {
       navOpacity: 0,
+      showTasks: false,
     }
   }
 
@@ -39,14 +40,18 @@ class App extends React.Component {
     this.setState({ navOpacity });
   }
 
+  toggleShowTasks(showTasks = !this.state.showTasks) {
+    this.setState({ showTasks });
+  }
+
   render() {
-    const { navOpacity } = this.state;
+    const { navOpacity, showTasks } = this.state;
 
     return (
       <div className={styles.app}>
         <nav className={classes(styles.nav, navOpacity && styles.shadow)}
              style={{ backgroundColor: `rgba(13, 63, 82, ${navOpacity})` }}>
-          <div className={styles.icon}>
+          <div className={styles.icon} onClick={() => this.toggleShowTasks()}>
             <FontAwesomeIcon fixedWidth icon={faTasks} />
           </div>
           <div className={styles.title}>LitterBug</div>
@@ -55,7 +60,11 @@ class App extends React.Component {
           </div>
         </nav>
         <main className={styles.main}>
-          <TaskDetail />
+          {
+            showTasks ?
+              <TaskDetail /> :
+              <Leaderboard />
+          }
         </main>
       </div>
     );

@@ -1,43 +1,14 @@
 @import "~/common/stylesheet/index";
 
-.task_list {
+.leaderboard {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  .table
-  {
-    border-collapse: collapse;
-    color: white;
-    top:100;
-    width:100%;
-    height: 20%;
-    border: 5px green;
-    .button
-    {
-      background-color: white;
-      cursor: pointer;
-    }
-    .th
-    {
-      text-align: left;
-      padding: 8px;
-      background-color: black;
-      width: 33%;
-    }
-    .td
-    {
-      text-align: left;
-      padding: 8px;
-      width: 33%;
-    }
-    .tr:nth-child(even){background-color: #144d65}
-    .tr:nth-child(odd){background-color: #0d3f52}
-  }
 
   .cover {
     position: relative;
     height: 240px;
-    background: url(/img/task/litters.jpg) center;
+    background: url(./img/task/leaderboard.jpg) top;
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -82,8 +53,11 @@
           margin-bottom: 4px;
         }
 
-        .points {
-
+        .sub {
+          .bold {
+            font-size: $font-size-large;
+            font-weight: bold;
+          }
         }
       }
 
@@ -91,6 +65,7 @@
         border: 2px solid white;
         padding: 8px;
         font-weight: bold;
+        margin-left: 8px;
 
         .icon {
           margin-right: 4px;
@@ -108,15 +83,33 @@
     }
   }
 
-  .task {
+  .row {
+    position: relative;
     display: flex;
     align-items: center;
-    background-color: $theme-normal;
-    padding: 28px 24px;
-    border-bottom: 1px solid $theme-light;
+    background-color: $theme-light;
+    border-bottom: 1px solid rgba(white, .2);
+    height: $height-row;
 
     .icon {
       font-size: $font-size-large;
+      width: $height-row;
+      display: flex;
+      justify-content: center;
+      font-weight: bold;
+
+      .top {
+        color: $color-neutral;
+      }
+    }
+
+    .avatar {
+      width: $size-avatar;
+      height: $size-avatar;
+      background-size: cover;
+      background-position: center;
+      border-radius: $size-avatar;
+      box-shadow: inset 0 0 4px rgba(black, .8);
       margin-right: 8px;
     }
 
@@ -126,11 +119,8 @@
     }
 
     .points {
-
-    }
-
-    &.checked {
-      background-color: $theme-light;
+      margin-right: 24px;
+      font-weight: bold;
     }
   }
 }

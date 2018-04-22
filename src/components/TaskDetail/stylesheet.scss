@@ -53,8 +53,11 @@
           margin-bottom: 4px;
         }
 
-        .points {
-
+        .sub {
+          .bold {
+            font-size: $font-size-large;
+            font-weight: bold;
+          }
         }
       }
 

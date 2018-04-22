@@ -13,12 +13,12 @@ class TaskDetail extends React.Component {
           <div className={styles.overlay}>
             <div className={styles.detail}>
               <span className={styles.name}>Pick up Litters</span>
-              <span className={styles.points}><span>37 LTB</span> Available</span>
+              <span className={styles.sub}>Earned <span className={styles.bold}>5</span> out of <span className={styles.bold}>32 LTB</span></span>
             </div>
-            <Link className={styles.button} to="/tasks/litter">
+            <a className={styles.button} href="#">
               <FontAwesomeIcon fixedWidth icon={faPlay} className={styles.icon} />
               <span className={styles.text}>Begin</span>
-            </Link>
+            </a>
           </div>
         </div>
         <CheckItem points={0} progress={1} label="Go to Somewhere">
