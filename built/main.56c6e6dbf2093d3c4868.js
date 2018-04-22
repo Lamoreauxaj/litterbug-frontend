@@ -104972,7 +104972,7 @@ var Litters = (_dec = (0, _reactRedux.connect)(function (_ref) {
     var _this = _possibleConstructorReturn(this, (Litters.__proto__ || Object.getPrototypeOf(Litters)).call(this, props));
 
     _this.state = {
-      step: 0,
+      step: 2,
       progress: 0
     };
     return _this;
@@ -109362,31 +109362,35 @@ var Camera = function (_React$Component) {
 
 
       this.timer = window.setInterval(function () {
-        var imageSrc = _this2.webcamRef.current.getScreenshot();
-        var dataURLtoBlob = function dataURLtoBlob(dataURL) {
-          var binary = window.atob(dataURL.split(',')[1]);
-          var array = [];
-          var i = 0;
-          while (i < binary.length) {
-            array.push(binary.charCodeAt(i++));
-          }return new Blob([new Uint8Array(array)], { type: 'image/jpeg' });
-        };
-        var data = new FormData();
-        data.append('file', dataURLtoBlob(imageSrc));
-        _axios2.default.post('http://206.189.178.156/validate-image', data, {
-          headers: {
-            'accept': 'application/json',
-            'Accept-Language': 'en-US,en;q=0.8',
-            'Content-Type': 'multipart/form-data; boundary=' + data._boundary
-          }
-        }).then(function (response) {
-          var _response$data = response.data,
-              valid = _response$data.valid,
-              similarity = _response$data.similarity;
+        try {
+          var imageSrc = _this2.webcamRef.current.getScreenshot();
+          var dataURLtoBlob = function dataURLtoBlob(dataURL) {
+            var binary = window.atob(dataURL.split(',')[1]);
+            var array = [];
+            var i = 0;
+            while (i < binary.length) {
+              array.push(binary.charCodeAt(i++));
+            }return new Blob([new Uint8Array(array)], { type: 'image/jpeg' });
+          };
+          var data = new FormData();
+          data.append('file', dataURLtoBlob(imageSrc));
+          _axios2.default.post('http://206.189.178.156/validate-image', data, {
+            headers: {
+              'accept': 'application/json',
+              'Accept-Language': 'en-US,en;q=0.8',
+              'Content-Type': 'multipart/form-data; boundary=' + data._boundary
+            }
+          }).then(function (response) {
+            var _response$data = response.data,
+                valid = _response$data.valid,
+                similarity = _response$data.similarity;
 
-          if (valid) onValid();
-          _this2.setState({ similarity: similarity });
-        }).catch(console.error);
+            if (valid) onValid();
+            _this2.setState({ similarity: similarity });
+          }).catch(console.error);
+        } catch (e) {
+          _this2.setState({ similarity: e.message });
+        }
       }, 3000);
     }
   }, {
