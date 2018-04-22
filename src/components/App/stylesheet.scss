@@ -39,12 +39,11 @@ input {
   min-height: 100%;
 
   .nav {
-    position: relative;
+    position: fixed;
     display: flex;
     align-items: stretch;
     background-color: rgba($theme-normal, 0);
     height: $height-nav;
-    position: fixed;
     z-index: 5;
     top: 0;
     left: 0;
@@ -76,6 +75,10 @@ input {
       justify-content: center;
       width: $height-nav;
       font-size: $font-size-icon;
+
+      &:active {
+        background-color: rgba(black, .2);
+      }
 
       &.selected {
         border-bottom: 2px solid $color-font;

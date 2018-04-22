@@ -104979,8 +104979,79 @@ var Litters = (_dec = (0, _reactRedux.connect)(function (_ref) {
   }
 
   _createClass(Litters, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var lastAlpha = null;
+      var lastBeta = null;
+      var lastGamma = null;
+      var still = 0;
+      var nonstill = 0;
+      this.gn = new GyroNorm();
+      this.gn.init({
+        gravityNormalized: false, // tried true too
+        orientationBase: GyroNorm.WORLD, // tried .GAME too
+        frequency: 100,
+        screenAdjusted: false
+      }).then(function () {
+        _this2.gn.start(function (data) {
+          var _data$do = data.do,
+              alpha = _data$do.alpha,
+              beta = _data$do.beta,
+              gamma = _data$do.gamma;
+
+          if (lastAlpha !== null) {
+            var da = (Math.abs(alpha - lastAlpha) + 360) % 360;
+            var db = (Math.abs(beta - lastBeta) + 360) % 360;
+            var dg = (Math.abs(gamma - lastGamma) + 180) % 180;
+            var delta = Math.sqrt(da * da + db * db + dg * dg);
+            if (delta < .1) {
+              still++;
+            } else {
+              nonstill++;
+            }
+            var step = _this2.state.step;
+
+            if (step === 0) {
+              if (still + nonstill > 30) {
+                if (still === 0 || nonstill / still > 1) {
+                  _this2.setState({ step: 1 });
+                }
+                still = nonstill = 0;
+              }
+            } else if (step === 1) {
+              if (still + nonstill > 30) {
+                if (nonstill === 0 || still / nonstill > 1.5) {
+                  _this2.setState({ step: 2 });
+                  _this2.gn.end();
+                }
+                still = nonstill = 0;
+              }
+            }
+          }
+          lastAlpha = alpha;
+          lastBeta = beta;
+          lastGamma = gamma;
+        });
+      }).catch(console.error);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.gn.end();
+    }
+  }, {
+    key: 'increaseProgress',
+    value: function increaseProgress() {
+      var progress = this.state.progress + .25;
+      this.setState({ progress: progress });
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this3 = this;
+
       var _state = this.state,
           step = _state.step,
           progress = _state.progress;
@@ -104991,14 +105062,16 @@ var Litters = (_dec = (0, _reactRedux.connect)(function (_ref) {
         { className: _stylesheet2.default.litters },
         _react2.default.createElement(
           _components.CheckItem,
-          { points: 0, progress: step > 0 ? 1 : 0, label: 'Go to Somewhere' },
-          step === 0 && _react2.default.createElement(_components.TrashMap, null)
+          { points: 0, progress: step === 1 ? .5 : step > 1 ? 1 : 0, label: 'Go to Somewhere' },
+          step < 2 && _react2.default.createElement(_components.TrashMap, null)
         ),
-        _react2.default.createElement(_components.CheckItem, { extra: true, points: 10, progress: step > 0 ? 1 : 0, label: 'Walk instead of Driving' }),
+        _react2.default.createElement(_components.CheckItem, { extra: true, points: 10, progress: step === 1 ? .5 : step > 1 ? 1 : 0, label: 'Walk instead of Driving' }),
         _react2.default.createElement(
           _components.CheckItem,
           { points: 25, progress: progress, label: 'Pick up 5 Pieces of Trash' },
-          step === 1 && _react2.default.createElement(_components.Camera, null)
+          step === 2 && _react2.default.createElement(_components.Camera, { onValid: function onValid() {
+              return _this3.increaseProgress();
+            } })
         )
       );
     }
@@ -105036,7 +105109,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-module.exports = {"task_detail":"task_detail__C2M7K","cover":"cover__vJOf-","overlay":"overlay__20Rm6","detail":"detail__1VO5n","name":"name__1Cmu3","sub":"sub__3eq29","bold":"bold__2DUep","button":"button__1Fezo","icon":"icon__2J079","text":"text__2P2Yl"};
+module.exports = {"task_detail":"task_detail__C2M7K"};
 
 /***/ }),
 /* 1248 */
@@ -109273,6 +109346,10 @@ var Camera = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Camera.__proto__ || Object.getPrototypeOf(Camera)).call(this, props));
 
     _this.webcamRef = _react2.default.createRef();
+
+    _this.state = {
+      similarity: 0
+    };
     return _this;
   }
 
@@ -109280,6 +109357,9 @@ var Camera = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var _this2 = this;
+
+      var onValid = this.props.onValid;
+
 
       this.timer = window.setInterval(function () {
         var imageSrc = _this2.webcamRef.current.getScreenshot();
@@ -109300,7 +109380,12 @@ var Camera = function (_React$Component) {
             'Content-Type': 'multipart/form-data; boundary=' + data._boundary
           }
         }).then(function (response) {
-          console.log(response.data);
+          var _response$data = response.data,
+              valid = _response$data.valid,
+              similarity = _response$data.similarity;
+
+          if (valid) onValid();
+          _this2.setState({ similarity: similarity });
         }).catch(console.error);
       }, 3000);
     }
@@ -109315,9 +109400,11 @@ var Camera = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         { className: _stylesheet2.default.camera },
+        this.state.similarity,
         _react2.default.createElement(_reactWebcam2.default, {
           audio: false,
-          width: 640,
+          width: 400,
+          height: 320,
           ref: this.webcamRef,
           screenshotFormat: 'image/jpeg' })
       );

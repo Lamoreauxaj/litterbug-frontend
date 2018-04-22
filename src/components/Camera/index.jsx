@@ -7,9 +7,15 @@ class Camera extends React.Component {
   constructor(props) {
     super(props);
     this.webcamRef = React.createRef();
+
+    this.state = {
+      similarity: 0
+    };
   }
 
   componentDidMount() {
+    const { onValid } = this.props;
+
     this.timer = window.setInterval(() => {
       const imageSrc = this.webcamRef.current.getScreenshot();
       const dataURLtoBlob = dataURL => {
@@ -28,7 +34,9 @@ class Camera extends React.Component {
           'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
         }
       }).then(response => {
-        console.log(response.data);
+        const { valid, similarity } = response.data;
+        if (valid) onValid();
+        this.setState({ similarity });
       }).catch(console.error);
     }, 3000);
   }
@@ -40,9 +48,11 @@ class Camera extends React.Component {
   render() {
     return (
       <div className={styles.camera}>
+        {this.state.similarity}
         <Webcam
           audio={false}
-          width={640}
+          width={400}
+          height={320}
           ref={this.webcamRef}
           screenshotFormat="image/jpeg" />
       </div>
