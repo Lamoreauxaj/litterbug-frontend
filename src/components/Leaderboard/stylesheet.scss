@@ -1,0 +1,136 @@
+@import "~/common/stylesheet/index";
+
+.task_list {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  .table
+  {
+    border-collapse: collapse;
+    color: white;
+    top:100;
+    width:100%;
+    height: 20%;
+    border: 5px green;
+    .button
+    {
+      background-color: white;
+      cursor: pointer;
+    }
+    .th
+    {
+      text-align: left;
+      padding: 8px;
+      background-color: black;
+      width: 33%;
+    }
+    .td
+    {
+      text-align: left;
+      padding: 8px;
+      width: 33%;
+    }
+    .tr:nth-child(even){background-color: #144d65}
+    .tr:nth-child(odd){background-color: #0d3f52}
+  }
+
+  .cover {
+    position: relative;
+    height: 240px;
+    background: url(/img/task/litters.jpg) center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-end;
+
+    &:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: $height-nav;
+      content: '';
+      background-image: linear-gradient(to bottom, rgba(black, .4), rgba(black, 0));
+    }
+
+    &:before {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: $height-task-overlay;
+      content: '';
+      background-image: linear-gradient(to top, rgba(black, .8), rgba(black, 0));
+    }
+
+    .overlay {
+      position: relative;
+      height: $height-task-overlay;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+
+      .detail {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+
+        .name {
+          font-size: 24px;
+          font-weight: bold;
+          margin-bottom: 4px;
+        }
+
+        .points {
+
+        }
+      }
+
+      .button {
+        border: 2px solid white;
+        padding: 8px;
+        font-weight: bold;
+
+        .icon {
+          margin-right: 4px;
+        }
+
+        .text {
+          text-transform: uppercase;
+        }
+
+        &:active {
+          background-color: white;
+          color: $theme-normal;
+        }
+      }
+    }
+  }
+
+  .task {
+    display: flex;
+    align-items: center;
+    background-color: $theme-normal;
+    padding: 28px 24px;
+    border-bottom: 1px solid $theme-light;
+
+    .icon {
+      font-size: $font-size-large;
+      margin-right: 8px;
+    }
+
+    .name {
+      font-size: $font-size-large;
+      flex: 1;
+    }
+
+    .points {
+
+    }
+
+    &.checked {
+      background-color: $theme-light;
+    }
+  }
+}
