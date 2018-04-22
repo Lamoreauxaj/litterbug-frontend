@@ -48,7 +48,9 @@ class Camera extends React.Component {
   render() {
     return (
       <div className={styles.camera}>
+        <span className={styles.debug}>
         {this.state.similarity}
+        </span>
         <Webcam
           audio={false}
           width={400}

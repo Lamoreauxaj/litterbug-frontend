@@ -1,9 +1,15 @@
 @import "~/common/stylesheet/index";
 
 .camera {
+  position: relative;
   flex: 1;
   background-color: black;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  .debug {
+    position: absolute;
+    opacity: .8;
+  }
 }

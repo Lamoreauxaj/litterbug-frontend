@@ -109301,7 +109301,7 @@ module.exports = exports['default'];
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-module.exports = {"camera":"camera__1_WOV"};
+module.exports = {"camera":"camera__1_WOV","debug":"debug__1dqqQ"};
 
 /***/ }),
 /* 1300 */
@@ -109403,7 +109403,11 @@ var Camera = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         { className: _stylesheet2.default.camera },
-        this.state.similarity,
+        _react2.default.createElement(
+          'span',
+          { className: _stylesheet2.default.debug },
+          this.state.similarity
+        ),
         _react2.default.createElement(_reactWebcam2.default, {
           audio: false,
           width: 400,
