@@ -104972,7 +104972,7 @@ var Litters = (_dec = (0, _reactRedux.connect)(function (_ref) {
     var _this = _possibleConstructorReturn(this, (Litters.__proto__ || Object.getPrototypeOf(Litters)).call(this, props));
 
     _this.state = {
-      step: 2,
+      step: 0,
       progress: 0
     };
     return _this;
