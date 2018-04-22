@@ -109388,7 +109388,7 @@ var Camera = function (_React$Component) {
             if (valid) onValid();
             _this2.setState({ similarity: similarity });
           }).catch(function (e) {
-            return _this2.setState({ similarity: e.message });
+            return _this2.setState({ similarity: e.response.status });
           });
         } catch (e) {
           _this2.setState({ similarity: e.message });
