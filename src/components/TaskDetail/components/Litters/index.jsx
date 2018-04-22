@@ -16,7 +16,7 @@ class Litters extends React.Component {
     super(props);
 
     this.state = {
-      step: 3,
+      step: 2,
       progress: 0,
     };
   }
