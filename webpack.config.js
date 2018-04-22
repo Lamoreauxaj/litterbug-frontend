@@ -33,7 +33,7 @@ module.exports = {
     srcPath,
   ]),
   resolve: {
-    modules: [path.resolve(__dirname, 'node_modules')],
+    modules: [srcPath, path.resolve(__dirname, 'node_modules')],
     extensions: ['.jsx', '.js', '.scss'],
     alias,
   },
@@ -50,7 +50,16 @@ module.exports = {
         use: filter([
           __DEV__ && 'css-hot-loader',
           MiniCssExtractPlugin.loader,
-          'css-loader?minimize&importLoaders=2&modules&localIdentName=[local]__[hash:base64:5]',
+          {
+            loader: 'css-loader',
+            options: {
+              minimize: true,
+              importLoaders: 2,
+              modules: true,
+              localIdentName: '[local]__[hash:base64:5]',
+              url: false,
+            }
+          },
           'postcss-loader',
           'sass-loader'
         ]),
@@ -66,35 +75,7 @@ module.exports = {
     ],
   },
   optimization: {
-    splitChunks: {
-      cacheGroups: {
-        vendors: {
-          test: /\/node_modules\//,
-          name: 'vendors',
-          chunks: 'all',
-          priority: 10,
-        },
-        core: {
-          test: /\/core\//,
-          name: 'core',
-          chunks: 'all',
-          priority: 5,
-          minSize: 0,
-        },
-      }
-    },
-    minimizer: [
-      new UglifyJSPlugin({
-        exclude: /core/,
-      }),
-      new UglifyJSPlugin({
-        include: /core/,
-        uglifyOptions: {
-          keep_classnames: true,
-          keep_fnames: true,
-        }
-      }),
-    ],
+    minimizer: [],
   },
   plugins: filter([
     new CleanWebpackPlugin([builtPath]),
